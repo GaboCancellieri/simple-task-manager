@@ -1,5 +1,6 @@
 import express from "express";
 import morgan from "morgan";
+import cors from "cors";
 import { connect } from "mongoose";
 import taskRoutes from "./routes/task.routes.js";
 
@@ -12,6 +13,7 @@ class Server {
     this.app = express();
     this.app.use(express.json({ limit: "200mb" }));
     this.app.use(morgan("dev"));
+    this.app.use(cors());
     connect("mongodb://localhost:27017/taskdb");
     this.app.use("/api/tasks", taskRoutes);
   }
